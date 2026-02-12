@@ -3,7 +3,6 @@
 Production-grade unified push notification library for Node.js with FCM and Expo support.
 
 [![npm version](https://img.shields.io/npm/v/jxpush.svg)](https://www.npmjs.com/package/jxpush)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Features
 
@@ -343,7 +342,7 @@ See the [examples](./examples) directory for complete working examples:
 
 ## Roadmap
 
-### Phase 1 (Current) ✅
+<!-- ### Phase 1 (Current) ✅
 - [x] FCM provider
 - [x] Single & bulk send
 - [x] Queue system
@@ -361,7 +360,7 @@ See the [examples](./examples) directory for complete working examples:
 
 ## License
 
-MIT © jxngrx
+MIT © jxngrx -->
 
 ## Contributing
 
