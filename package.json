@@ -61,7 +61,7 @@
   },
   "homepage": "https://github.com/jxngrx/jxpush#readme",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=20.0.0"
   },
   "bin": {
     "jxpush": "./bin/jxpush.js"
