@@ -159,23 +159,6 @@ new PushClient({
 
 ---
 
-## 🗺️ Roadmap
-
-### Phase 1 (Completed) ✅
-- [x] FCM & Expo Providers
-- [x] Resilient Queue System
-- [x] Rate Limiting & Retries
-- [x] Fluent Message Builder
-
-### Phase 2 (Upcoming) 🚧
-- [ ] **Topic Messaging**: Unified topic API for all providers
-- [ ] **Scheduling**: `client.schedule(message, date)`
-- [ ] **WebPush**: Browser notification support
-- [ ] **Redis Adapter**: Distributed queue for horizontal scaling
-- [ ] **Template Engine**: `client.sendTemplate('welcome', { user: 'Naval' })`
-
----
-
 ## 🤝 Contributing
 
 We love contributions! Please read our **[Contributing Guide](./CONTRIBUTING.md)** to get started.

@@ -2,6 +2,8 @@
  * Internal logging utility
  */
 
+/* eslint-disable no-console */
+
 import { LogLevel } from '../types/config.types.js';
 
 /**
