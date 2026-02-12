@@ -42,14 +42,14 @@ await client.send({
 
 Most push libraries are simple wrappers. **jxpush is infrastructure-in-a-box.**
 
-| Feature | Generic Wrappers | ⚡ jxpush |
-|---------|-----------------|-----------|
-| **Multi-Provider** | ❌ (Single only) | ✅ **FCM + Expo** |
-| **Bulk Sending** | ❌ Manual loops | ✅ **Auto-chunking** (500/batch) |
-| **Rate Limiting** | ❌ You get banned | ✅ **Token Bucket** (Auto-throttles) |
-| **Reliability** | ❌ Fails silently | ✅ **Smart Retries** (Exp. Backoff) |
-| **Type Safety** | ⚠️ Partial | ✅ **100% Written in TypeScript** |
-| **Throughput** | 🐢 Serial | 🚀 **Concurrent Queue System** |
+| Feature | `firebase-admin` / `expo-server-sdk` | `node-pushnotifications` | ⚡ **jxpush** |
+|---------|--------------------------------------|--------------------------|--------------|
+| **Multi-Provider** | ❌ (Single only) | ✅ (Plugins) | ✅ **Unified API** |
+| **Bulk Sending** | ❌ Manual handling | ⚠️ Basic loop | ✅ **Auto-chunking** |
+| **Rate Limiting** | ❌ You get banned | ❌ None | ✅ **Token Bucket** |
+| **Reliability** | ❌ Fails silently | ❌ None | ✅ **Smart Retries** |
+| **Type Safety** | ✅ Good | ⚠️ Partial | ✅ **100% TypeScript** |
+| **Queueing** | ❌ None | ❌ None | 🚀 **Concurrent Queue** |
 
 ---
 
@@ -159,6 +159,35 @@ new PushClient({
 
 ---
 
-## License
+## 🗺️ Roadmap
+
+### Phase 1 (Completed) ✅
+- [x] FCM & Expo Providers
+- [x] Resilient Queue System
+- [x] Rate Limiting & Retries
+- [x] Fluent Message Builder
+
+### Phase 2 (Upcoming) 🚧
+- [ ] **Topic Messaging**: Unified topic API for all providers
+- [ ] **Scheduling**: `client.schedule(message, date)`
+- [ ] **WebPush**: Browser notification support
+- [ ] **Redis Adapter**: Distributed queue for horizontal scaling
+- [ ] **Template Engine**: `client.sendTemplate('welcome', { user: 'Naval' })`
+
+---
+
+## 🤝 Contributing
+
+We love contributions! Please read our **[Contributing Guide](./CONTRIBUTING.md)** to get started.
+
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
 
 MIT © [jxngrx](https://github.com/jxngrx)

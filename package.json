@@ -1,6 +1,6 @@
 {
   "name": "jxpush",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Production-grade unified push notification library for Node.js with FCM and Expo support",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -63,13 +63,18 @@
   "engines": {
     "node": ">=16.0.0"
   },
+  "bin": {
+    "jxpush": "./bin/jxpush.js"
+  },
   "dependencies": {
-    "firebase-admin": "^12.0.0",
-    "expo-server-sdk": "^5.0.0"
+    "commander": "^11.0.0",
+    "expo-server-sdk": "^5.0.0",
+    "firebase-admin": "^12.0.0"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.11.19",
+    "@types/node": "^20.19.33",
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "@typescript-eslint/parser": "^7.0.1",
     "eslint": "^8.56.0",

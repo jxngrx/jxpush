@@ -2,7 +2,7 @@
  * Queue usage example
  */
 
-import { PushClient, ProviderType } from '../src';
+import { PushClient, ProviderType, LogLevel } from '../src';
 
 async function main() {
   // Initialize client with queue enabled
@@ -23,7 +23,7 @@ async function main() {
       maxPerMinute: 2000, // Max 2000 requests per minute
       allowBurst: true,
     },
-    logLevel: 'info' as const,
+    logLevel: LogLevel.INFO,
   });
 
   await client.initialize();
