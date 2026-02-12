@@ -12,3 +12,4 @@ JX_TEST
 firebase-service-account.json
 *.tgz
 JX_DOCS
+docs
