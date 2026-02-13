@@ -8,6 +8,7 @@
 export enum ProviderType {
   FCM = 'fcm',
   EXPO = 'expo',
+  WEBPUSH = 'webpush',
 }
 
 /**

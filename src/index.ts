@@ -1,5 +1,5 @@
 /**
- * jxpush - Production-grade unified push notification library
+ * jxpush - Production-grade unified messaging and push delivery engine
  * Main entry point
  */
 
@@ -9,7 +9,36 @@ export { PushClient } from './client/PushClient.js';
 // Message builder
 export { MessageBuilder } from './builder/MessageBuilder.js';
 
-// Types
+// Providers
+export { FCMProvider } from './providers/fcm/FCMProvider.js';
+export { ExpoProvider } from './providers/expo/ExpoProvider.js';
+export { WebPushProvider } from './providers/webpush/WebPushProvider.js';
+
+// Queue Adapters
+export { QueueAdapter, QueueJob, QueueMetrics, QueueAdapterConfig } from './queue/adapters/IQueueAdapter.js';
+export { BaseQueueAdapter } from './queue/adapters/BaseQueueAdapter.js';
+export { RedisQueueAdapter, RedisQueueAdapterConfig } from './queue/adapters/RedisQueueAdapter.js';
+export { BullMQAdapter, BullMQAdapterConfig } from './queue/adapters/BullMQAdapter.js';
+
+// Email Adapters
+export { IEmailAdapter } from './adapters/email/IEmailAdapter.js';
+export { ResendAdapter } from './adapters/email/ResendAdapter.js';
+export { SMTPAdapter } from './adapters/email/SMTPAdapter.js';
+
+// Messaging Adapters
+export { IMessagingAdapter } from './adapters/messaging/IMessagingAdapter.js';
+export { KafkaAdapter } from './adapters/messaging/KafkaAdapter.js';
+export { RabbitMQAdapter } from './adapters/messaging/RabbitMQAdapter.js';
+
+// Template Engine
+export { TemplateEngine } from './templates/TemplateEngine.js';
+export { TemplateLoader } from './templates/TemplateLoader.js';
+
+// Localization
+export { LocalizationEngine } from './localization/LocalizationEngine.js';
+export { LocaleLoader } from './localization/LocaleLoader.js';
+
+// Types - Config
 export {
   ProviderType,
   LogLevel,
@@ -22,6 +51,7 @@ export {
   AnalyticsHooks,
 } from './types/config.types.js';
 
+// Types - Messages
 export {
   MessagePriority,
   NotificationPayload,
@@ -33,7 +63,49 @@ export {
   ScheduledMessage,
 } from './types/message.types.js';
 
+// Types - Providers
 export { ProviderCapabilities, IProvider } from './types/provider.types.js';
+
+// Types - Web Push
+export {
+  WebPushConfig,
+  WebPushSubscription,
+  WebPushMessage,
+  WebPushOptions,
+  WebPushResult,
+} from './types/webpush.types.js';
+
+// Types - Email
+export {
+  EmailMessage,
+  EmailAttachment,
+  EmailSendResult,
+  ResendConfig,
+  SMTPConfig,
+} from './types/email.types.js';
+
+// Types - Messaging
+export {
+  MessagingMessage,
+  MessagingResult,
+  KafkaConfig,
+  RabbitMQConfig,
+} from './types/messaging.types.js';
+
+// Types - Templates
+export {
+  Template,
+  TemplateData,
+  TemplateConfig,
+  RenderedTemplate,
+} from './types/template.types.js';
+
+// Types - Localization
+export {
+  Locale,
+  LocaleData,
+  LocalizationConfig,
+} from './types/localization.types.js';
 
 // Errors
 export { PushError, ErrorCode } from './errors/PushError.js';
