@@ -38,7 +38,7 @@ const FEATURE_DEPS: Record<string, string> = {
   templates: 'handlebars@^4.7.8',
 };
 
-async function runSetup() {
+async function runSetup(): Promise<void> {
   console.log(chalk.cyan.bold('\n🚀 Welcome to jxpush Setup Wizard\n'));
 
   const answers = await inquirer.prompt<SetupAnswers>([
@@ -53,7 +53,7 @@ async function runSetup() {
         { name: 'Web Push (VAPID)', value: 'webpush' },
         { name: 'Email (SMTP/Resend)', value: 'email' },
       ],
-      validate: (input) => input.length > 0 || 'Select at least one provider',
+      validate: (input): boolean | string => input.length > 0 || 'Select at least one provider',
     },
     {
       type: 'list',
@@ -199,7 +199,11 @@ async function runSetup() {
   }
 
   console.log(chalk.yellow('  3. Run example:'));
-  console.log(chalk.gray(`     $ ${answers.language === 'typescript' ? 'ts-node' : 'node'} examples/send-notification.${configExt}\n`));
+  console.log(
+    chalk.gray(
+      `     $ ${answers.language === 'typescript' ? 'ts-node' : 'node'} examples/send-notification.${configExt}\n`
+    )
+  );
 }
 
 function getInstallCommand(pm: string, deps: string[]): string {
@@ -291,9 +295,7 @@ function generateQueueSetup(answers: SetupAnswers): string {
   const adapterName =
     answers.queueBackend === 'memory'
       ? 'InMemoryQueue'
-      : answers.queueBackend.charAt(0).toUpperCase() +
-        answers.queueBackend.slice(1) +
-        'Adapter';
+      : answers.queueBackend.charAt(0).toUpperCase() + answers.queueBackend.slice(1) + 'Adapter';
 
   return `import { ${adapterName} } from 'jxpush';
 import config from '../jxpush.config${isTS ? '' : '.js'}';

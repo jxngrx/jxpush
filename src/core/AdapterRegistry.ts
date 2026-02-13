@@ -4,20 +4,22 @@
  */
 
 import type { QueueAdapter } from '../queue/adapters/IQueueAdapter.js';
+import type { RedisQueueAdapterConfig } from '../queue/adapters/RedisQueueAdapter.js';
+import type { BullMQAdapterConfig } from '../queue/adapters/BullMQAdapter.js';
 import { PushError } from '../errors/PushError.js';
 
 type AdapterType = 'redis' | 'bullmq';
 
 export class AdapterRegistry {
   private static adapters = new Map<AdapterType, QueueAdapter>();
-  private static loaders = new Map<AdapterType, (config: any) => Promise<QueueAdapter>>();
+  private static loaders = new Map<AdapterType, (config: unknown) => Promise<QueueAdapter>>();
 
   /**
    * Register an adapter loader (lazy)
    */
   static registerLoader(
     type: AdapterType,
-    loader: (config: any) => Promise<QueueAdapter>
+    loader: (config: unknown) => Promise<QueueAdapter>
   ): void {
     this.loaders.set(type, loader);
   }
@@ -25,7 +27,7 @@ export class AdapterRegistry {
   /**
    * Get adapter instance (loads if not cached)
    */
-  static async getAdapter(type: AdapterType, config: any): Promise<QueueAdapter> {
+  static async getAdapter(type: AdapterType, config: unknown): Promise<QueueAdapter> {
     // Return cached instance
     if (this.adapters.has(type)) {
       return this.adapters.get(type)!;
@@ -81,7 +83,7 @@ export class AdapterRegistry {
 AdapterRegistry.registerLoader('redis', async (config) => {
   try {
     const { RedisQueueAdapter } = await import('../queue/adapters/RedisQueueAdapter.js');
-    return new RedisQueueAdapter(config);
+    return new RedisQueueAdapter(config as RedisQueueAdapterConfig);
   } catch (error) {
     throw new Error(
       'Redis adapter requires "ioredis" peer dependency. Install with: npm install ioredis'
@@ -92,7 +94,7 @@ AdapterRegistry.registerLoader('redis', async (config) => {
 AdapterRegistry.registerLoader('bullmq', async (config) => {
   try {
     const { BullMQAdapter } = await import('../queue/adapters/BullMQAdapter.js');
-    return new BullMQAdapter(config);
+    return new BullMQAdapter(config as BullMQAdapterConfig);
   } catch (error) {
     throw new Error(
       'BullMQ adapter requires "bullmq" peer dependency. Install with: npm install bullmq'

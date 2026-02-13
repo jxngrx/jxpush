@@ -4,6 +4,8 @@
  */
 
 import type { Provider } from '../providers/base/Provider.js';
+import type { FCMConfig, ExpoConfig } from '../types/config.types.js';
+import type { WebPushConfig } from '../types/webpush.types.js';
 import { ProviderType } from '../types/config.types.js';
 import { PushError } from '../errors/PushError.js';
 import { createLogger } from '../utils/logger.js';
@@ -11,20 +13,20 @@ import { LogLevel } from '../types/config.types.js';
 
 export class ProviderRegistry {
   private static providers = new Map<ProviderType, Provider>();
-  private static loaders = new Map<ProviderType, (config: any) => Promise<Provider>>();
+  private static loaders = new Map<ProviderType, (config: unknown) => Promise<Provider>>();
   private static defaultLogger = createLogger(LogLevel.WARN);
 
   /**
    * Register a provider loader (lazy)
    */
-  static registerLoader(type: ProviderType, loader: (config: any) => Promise<Provider>): void {
+  static registerLoader(type: ProviderType, loader: (config: unknown) => Promise<Provider>): void {
     this.loaders.set(type, loader);
   }
 
   /**
    * Get provider instance (loads if not cached)
    */
-  static async getProvider(type: ProviderType, config: any): Promise<Provider> {
+  static async getProvider(type: ProviderType, config: unknown): Promise<Provider> {
     // Return cached instance
     if (this.providers.has(type)) {
       return this.providers.get(type)!;
@@ -80,7 +82,7 @@ export class ProviderRegistry {
 ProviderRegistry.registerLoader(ProviderType.FCM, async (config) => {
   try {
     const { FCMProvider } = await import('../providers/fcm/FCMProvider.js');
-    return new FCMProvider(config, ProviderRegistry['defaultLogger']);
+    return new FCMProvider(config as FCMConfig, ProviderRegistry['defaultLogger']);
   } catch (error) {
     throw new Error(
       'FCM provider requires "firebase-admin" peer dependency. Install with: npm install firebase-admin'
@@ -91,7 +93,7 @@ ProviderRegistry.registerLoader(ProviderType.FCM, async (config) => {
 ProviderRegistry.registerLoader(ProviderType.EXPO, async (config) => {
   try {
     const { ExpoProvider } = await import('../providers/expo/ExpoProvider.js');
-    return new ExpoProvider(config, ProviderRegistry['defaultLogger']);
+    return new ExpoProvider(config as ExpoConfig, ProviderRegistry['defaultLogger']);
   } catch (error) {
     throw new Error(
       'Expo provider requires "expo-server-sdk" peer dependency. Install with: npm install expo-server-sdk'
@@ -102,7 +104,7 @@ ProviderRegistry.registerLoader(ProviderType.EXPO, async (config) => {
 ProviderRegistry.registerLoader(ProviderType.WEBPUSH, async (config) => {
   try {
     const { WebPushProvider } = await import('../providers/webpush/WebPushProvider.js');
-    return new WebPushProvider(config, ProviderRegistry['defaultLogger']);
+    return new WebPushProvider(config as WebPushConfig, ProviderRegistry['defaultLogger']);
   } catch (error) {
     throw new Error(
       'Web Push provider requires "web-push" peer dependency. Install with: npm install web-push'

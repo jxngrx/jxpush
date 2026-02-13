@@ -6,7 +6,7 @@
 import { Queue, Worker, Job, QueueEvents } from 'bullmq';
 import type { ConnectionOptions } from 'bullmq';
 import { BaseQueueAdapter } from './BaseQueueAdapter.js';
-import type { QueueJob, QueueAdapterConfig } from './IQueueAdapter.js';
+import type { QueueJob, QueueAdapterConfig, QueueMetrics } from './IQueueAdapter.js';
 
 export interface BullMQAdapterConfig extends QueueAdapterConfig {
   connection?: ConnectionOptions;
@@ -140,7 +140,7 @@ export class BullMQAdapter extends BaseQueueAdapter {
     await this.queue.close();
   }
 
-  async getMetrics() {
+  async getMetrics(): Promise<QueueMetrics> {
     const counts = await this.queue.getJobCounts(
       'waiting',
       'active',

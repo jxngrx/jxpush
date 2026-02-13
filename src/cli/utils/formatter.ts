@@ -52,7 +52,9 @@ export class Formatter {
   /**
    * Create results table
    */
-  static createResultsTable(results: Array<{ status: string; message: string; token?: string }>) {
+  static createResultsTable(
+    results: Array<{ status: string; message: string; token?: string }>
+  ): string {
     const table = new Table({
       head: [chalk.cyan('Status'), chalk.cyan('Token'), chalk.cyan('Message')],
       colWidths: [10, 40, 50],
@@ -80,7 +82,7 @@ export class Formatter {
     success: number;
     failed: number;
     duration: number;
-  }) {
+  }): string {
     const table = new Table({
       head: [chalk.cyan('Metric'), chalk.cyan('Value')],
       colWidths: [20, 20],
@@ -105,7 +107,7 @@ export class Formatter {
     processing: number;
     completed: number;
     failed: number;
-  }) {
+  }): string {
     const table = new Table({
       head: [chalk.cyan('Queue Status'), chalk.cyan('Count')],
       colWidths: [20, 15],

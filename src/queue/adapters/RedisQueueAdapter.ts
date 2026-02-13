@@ -5,7 +5,7 @@
 
 import Redis from 'ioredis';
 import { BaseQueueAdapter } from './BaseQueueAdapter.js';
-import type { QueueJob, QueueAdapterConfig } from './IQueueAdapter.js';
+import type { QueueJob, QueueAdapterConfig, QueueMetrics } from './IQueueAdapter.js';
 
 export interface RedisQueueAdapterConfig extends QueueAdapterConfig {
   redis?: {
@@ -248,7 +248,7 @@ export class RedisQueueAdapter extends BaseQueueAdapter {
   /**
    * Get detailed metrics
    */
-  async getMetrics() {
+  async getMetrics(): Promise<QueueMetrics> {
     const pending = await this.redis.llen(`${this.keyPrefix}pending`);
     const processing = await this.redis.hlen(`${this.keyPrefix}processing`);
     const completed = await this.redis.scard(`${this.keyPrefix}completed`);
